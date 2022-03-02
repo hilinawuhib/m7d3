@@ -9,7 +9,7 @@ const mainReducer = (state = initialState, action) => {
         favorite: {
           ...state.favorite,
 
-          jobs: [...state.cart.jobs, action.payload],
+          jobs: [...state.favorite.jobs, action.payload],
         },
       };
 
