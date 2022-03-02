@@ -19,7 +19,7 @@ const mainReducer = (state = initialState, action) => {
         favorite: {
           ...state.favorite,
 
-          products: [
+          jobs: [
             ...state.favorite.jobs.slice(0, action.payload),
             ...state.favorite.jobs.slice(action.payload + 1),
           ],

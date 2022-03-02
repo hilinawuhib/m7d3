@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import {connect} from "react-redux";
-import JobList from "./JobLists";
+import Jobs from "./Jobs";
 import { addToFavoriteAction } from '../redux/actions'
 import uniqid from "uniqid";
 const mapStateToProps = () => ({});
@@ -71,7 +71,7 @@ class Search extends Component {
           </Col>
           <Col xs={10} className="mx-auto mb-4">
             {this.state.jobs.map((jobData) => (
-              <JobList key={uniqid()} data={jobData} />
+              <Jobs key={uniqid()} data={jobData} />
             ))}
           
           </Col>

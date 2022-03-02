@@ -1,35 +1,34 @@
-import Button from "react-bootstrap/Button";
-
-import { Col, Row } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { AiFillHeart} from "react-icons/ai";
 import { connect } from "react-redux";
 import { removeFromFavoriteAction } from "../redux/actions";
 
-const mapStateToProps = (state) => ({
-  jobs: state.favorite.jobs,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  removeFromFavorite: (index) => {
-    dispatch(removeFromFavoriteAction(index));
+  removeFromFavoriteAction: (f) => {
+    dispatch(removeFromFavoriteAction(f));
   },
 });
 
-const Favorite = ({ jobs, removeFromFavorite }) => (
-  <Row>
-    <Col sm={12}>
-      <ul style={{ listStyle: "none" }}>
-        {jobs.map((job, i) => (
-          <li key={i} className="my-4">
-            <Button variant="danger" onClick={() => removeFromFavorite(i)}>
-              Remove
-            </Button>
+class Favourites extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Row>
+          <Col xs={12}>
+            <ListGroup>
+              {this.props.favorite.jobs.map((f) => (
+                <ListGroupItem>
+                  <AiFillHeart  />
+                  <span>{f}</span>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
-            {job.title}
-          </li>
-        ))}
-      </ul>
-    </Col>
-  </Row>
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorite);
+export default connect((s) => s, mapDispatchToProps)(Favourites);

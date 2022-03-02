@@ -5,6 +5,9 @@
   font-family: 'Open Sans', sans-serif;
  
 }
+a{
+  color: rgb(150, 129, 129) !important;
+}
 
 
 .App-logo {
