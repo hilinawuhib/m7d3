@@ -1,13 +1,28 @@
 import { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {connect} from "react-redux";
 import JobList from "./JobLists";
+import { addToFavoriteAction } from '../redux/actions'
 import uniqid from "uniqid";
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite: (jobToAdd) => {
+    dispatch(addToFavoriteAction(jobToAdd));
+  },
+});
 
 class Search extends Component {
   state = {
     query: "",
     jobs: [],
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.jobSelected !== this.props.jobSelected) {
+      this.setState({
+        job: this.props.jobSelected,
+      });
+    }
+  }
 
   BASE_URL = "https://strive-jobs-api.herokuapp.com/jobs?search=";
 
@@ -21,13 +36,14 @@ class Search extends Component {
     const response = await fetch(
       this.BASE_URL + this.state.query + "&limit=15"
     );
-
+    console.log(response);
     if (!response.ok) {
       console.log("error");
       return;
     }
 
     const { data } = await response.json();
+    console.log(data);
 
     this.setState({ jobs: data });
   };
@@ -36,10 +52,11 @@ class Search extends Component {
     return (
       <Container>
         <Row>
-          <Col xs={10} className="mx-auto my-3"></Col>
-          <Col xs={8} className="mx-auto">
+          <Col md={10} className="mx-auto my-3"></Col>
+          <Col md={8} className="mx-auto">
             <Form onSubmit={this.handleSubmit}>
               <Form.Control
+                className="btn-search"
                 type="search"
                 value={this.state.query}
                 onChange={this.handleChange}
@@ -56,6 +73,7 @@ class Search extends Component {
             {this.state.jobs.map((jobData) => (
               <JobList key={uniqid()} data={jobData} />
             ))}
+          
           </Col>
         </Row>
       </Container>
@@ -63,4 +81,5 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default connect(mapStateToProps, mapDispatchToProps) (Search);
+
