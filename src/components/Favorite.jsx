@@ -1,34 +1,37 @@
 import React from "react";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
-import { AiFillHeart} from "react-icons/ai";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { MdOutlineRemoveCircle } from "react-icons/md";
 import { connect } from "react-redux";
 import { removeFromFavoriteAction } from "../redux/actions";
+const mapStateToProps = (state) => ({
+  favorite: state.favorite.jobs,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  removeFromFavoriteAction: (f) => {
-    dispatch(removeFromFavoriteAction(f));
+  removeFromFavorites: (index) => {
+    dispatch(removeFromFavoriteAction(index));
   },
 });
 
-class Favourites extends React.Component {
-  render() {
-    return (
-      <Container>
-        <Row>
-          <Col xs={12}>
-            <ListGroup>
-              {this.props.favorite.jobs.map((f) => (
-                <ListGroupItem>
-                  <AiFillHeart  />
-                  <span>{f}</span>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+const Favourites = ({ favorite, removeFromFavorites }) => {
+  return (
+    <Container>
+      <Row>
+        <Col sm={12}>
+          <ul style={{ listStyle: "none" }}>
+            {favorite.map((jobs, i) => (
+              <li key={i} className="my-4">
+                <Button variant="danger" onClick={() => removeFromFavorites(i)}>
+                  <MdOutlineRemoveCircle />
+                </Button>
+                <span>{jobs.title}</span>
+              </li>
+            ))}
+          </ul>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-export default connect((s) => s, mapDispatchToProps)(Favourites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favourites);

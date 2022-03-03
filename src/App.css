@@ -1,14 +1,13 @@
 .App {
   text-align: center;
 }
-*{
-  font-family: 'Open Sans', sans-serif;
- 
+* {
+  font-family: "Montserrat", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
-a{
+a {
   color: rgb(150, 129, 129) !important;
 }
-
 
 .App-logo {
   height: 40vmin;
@@ -20,11 +19,11 @@ a{
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.center{
-  width:25vw;
-  height:40px;
+.center {
+  width: 25vw;
+  height: 40px;
   justify-content: center;
-  margin-left:200px;
+  margin-left: 200px;
   margin-top: 100px;
 }
 .App-header {
@@ -50,15 +49,21 @@ a{
     transform: rotate(360deg);
   }
 }
-.joblist{
-  border:1px rgb(156, 151, 151) solid;
+.joblist {
+  border: 1px rgb(156, 151, 151) solid;
   border-radius: 20px;
   background-color: aliceblue;
-  
 }
-.fav{
+.fav {
   color: white !important;
 }
-.btnfav{
-right:0!important;
+.btnfav {
+  right: 0 !important;
+}
+.navbtn {
+  background-color: transparent !important;
+  border: black solid 2px !important;
+}
+.navtxt {
+  color: rgb(182, 172, 172) !important;
 }

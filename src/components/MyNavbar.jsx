@@ -1,18 +1,26 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+const mapStateToProps = (state) => ({
+  favorite: state.favorite.jobs,
+});
 
-class MyNavbar extends React.Component {
-  render() {
-    return (
-      <>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">Job search app</Navbar.Brand>
-         <a className="fav"href="/favorite">Favorite</a>
-        </Navbar>
-      </>
-    );
-  }
-}
+const MyNavbar = () => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand className="navtxt" href="/">
+          Job search app
+        </Navbar.Brand>
+        <Button className="navbtn" onClick={() => navigate("/favorite")}>
+          Favorites
+        </Button>
+      </Navbar>
+    </>
+  );
+};
 
-export default MyNavbar;
+export default connect(mapStateToProps)(MyNavbar);

@@ -1,13 +1,13 @@
 import { Component } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import {connect} from "react-redux";
-import Jobs from "./Jobs";
-import { addToFavoriteAction } from '../redux/actions'
+import { connect } from "react-redux";
+import JobList from "./JobLists";
+import { addToFavoriteAction } from "../redux/actions";
 import uniqid from "uniqid";
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
-  addToFavorite: (jobToAdd) => {
-    dispatch(addToFavoriteAction(jobToAdd));
+  addToFavorite: (company) => {
+    dispatch(addToFavoriteAction(company));
   },
 });
 
@@ -60,7 +60,7 @@ class Search extends Component {
                 type="search"
                 value={this.state.query}
                 onChange={this.handleChange}
-                placeholder="job title,company"
+                placeholder="Job title,Company"
               />
             </Form>
           </Col>
@@ -71,9 +71,8 @@ class Search extends Component {
           </Col>
           <Col xs={10} className="mx-auto mb-4">
             {this.state.jobs.map((jobData) => (
-              <Jobs key={uniqid()} data={jobData} />
+              <JobList key={uniqid()} data={jobData} />
             ))}
-          
           </Col>
         </Row>
       </Container>
@@ -81,5 +80,4 @@ class Search extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Search);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
