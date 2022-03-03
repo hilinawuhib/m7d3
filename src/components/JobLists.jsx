@@ -20,12 +20,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const JobList = ({ data, favorite, addToFavorites, removeFromFavorites }) => {
-  const isFavorite = favorite.includes(data.company_name);
+  const isFavorite = favorite.includes(data);
   console.log(isFavorite, favorite);
   const toggleFavorite = () => {
     isFavorite
-      ? removeFromFavorites(data.company_name)
-      : addToFavorites(data.company_name);
+      ? removeFromFavorites(data)
+      : addToFavorites(data);
   };
   return (
     <Row className="mt-5 joblist">

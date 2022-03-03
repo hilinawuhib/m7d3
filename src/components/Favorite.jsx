@@ -24,7 +24,9 @@ const Favourites = ({ favorite, removeFromFavorites }) => {
                 <Button variant="danger" onClick={() => removeFromFavorites(i)}>
                   <MdOutlineRemoveCircle />
                 </Button>
-                <span>{jobs.title}</span>
+                <div>{jobs.title}</div>
+                <div>{jobs.company_name}</div>
+                
               </li>
             ))}
           </ul>
